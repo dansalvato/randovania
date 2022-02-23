@@ -2,7 +2,7 @@ import dataclasses
 from pathlib import Path
 from typing import Optional
 
-from PySide2.QtWidgets import QMessageBox, QDialog, QLabel, QRadioButton
+from PySide6.QtWidgets import QMessageBox, QDialog, QLabel, QRadioButton
 
 from randovania.games.game import RandovaniaGame
 from randovania.gui.generated.game_input_dialog_ui import Ui_GameInputDialog

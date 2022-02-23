@@ -1,4 +1,4 @@
-from PySide2 import QtCore
+from PySide6 import QtCore
 
 from randovania.gui.preset_settings.item_configuration_widget import ItemConfigurationWidget
 from randovania.layout.base.major_item_state import MajorItemState

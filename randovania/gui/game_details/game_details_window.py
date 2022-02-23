@@ -3,9 +3,10 @@ import dataclasses
 import typing
 from typing import Dict, Optional
 
-from PySide2 import QtCore, QtWidgets, QtGui
-from PySide2.QtCore import Qt
-from PySide2.QtWidgets import QApplication, QDialog, QAction, QMenu
+from PySide6 import QtCore, QtWidgets, QtGui
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QApplication, QDialog, QMenu
+from PySide6.QtGui import QAction
 from qasync import asyncSlot
 
 from randovania.game_description import default_database

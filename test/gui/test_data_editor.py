@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-from PySide2.QtWidgets import QDialog, QMessageBox
+from PySide6.QtWidgets import QDialog, QMessageBox
 from mock import AsyncMock, patch, ANY, MagicMock
 
 from randovania.game_description import data_reader, pretty_print
@@ -97,7 +97,7 @@ def test_save_database_integrity_failure(tmp_path, echoes_game_data, skip_qtbot,
     mock_find_database_errors = mocker.patch("randovania.game_description.integrity_check.find_database_errors",
                                              return_value=["DB Errors"])
     mock_write_human_readable_game = mocker.patch("randovania.game_description.pretty_print.write_human_readable_game")
-    mock_critical_message = mocker.patch("PySide2.QtWidgets.QMessageBox.critical",
+    mock_critical_message = mocker.patch("PySide6.QtWidgets.QMessageBox.critical",
                                          return_value=QMessageBox.No)
 
     tmp_path.joinpath("test-game", "game").mkdir(parents=True)

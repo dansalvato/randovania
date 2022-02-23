@@ -1,6 +1,6 @@
 from typing import List
 
-from PySide2.QtWidgets import QDialog
+from PySide6.QtWidgets import QDialog
 
 from randovania.game_description.world.world import World
 from randovania.gui import game_specific_gui

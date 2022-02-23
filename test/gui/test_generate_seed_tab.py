@@ -1,5 +1,5 @@
 import pytest
-from PySide2 import QtWidgets
+from PySide6 import QtWidgets
 from mock import MagicMock, AsyncMock, ANY
 
 from randovania.games.game import RandovaniaGame

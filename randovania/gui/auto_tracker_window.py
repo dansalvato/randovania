@@ -4,11 +4,11 @@ import logging
 from enum import Enum
 from typing import Dict, List, Union, Optional
 
-import PySide2
-from PySide2 import QtWidgets
-from PySide2.QtCore import QTimer, Signal, Qt
-from PySide2.QtGui import QPixmap
-from PySide2.QtWidgets import QMainWindow, QLabel, QSpacerItem, QSizePolicy, QActionGroup
+import PySide6
+from PySide6 import QtWidgets
+from PySide6.QtCore import QTimer, Signal, Qt
+from PySide6.QtGui import QPixmap, QActionGroup
+from PySide6.QtWidgets import QMainWindow, QLabel, QSpacerItem, QSizePolicy
 from qasync import asyncSlot
 
 from randovania import get_data_path
@@ -75,7 +75,7 @@ class AutoTrackerWindow(QMainWindow, Ui_AutoTrackerWindow):
         self._action_to_name = {}
         theme_group = QActionGroup(self)
         for name in self.trackers.keys():
-            action = QtWidgets.QAction(self.menu_tracker)
+            action = QtGui.QAction(self.menu_tracker)
             action.setText(name)
             action.setCheckable(True)
             action.setChecked(name == options.selected_tracker)
@@ -100,11 +100,11 @@ class AutoTrackerWindow(QMainWindow, Ui_AutoTrackerWindow):
         self._update_timer.timeout.connect(self._on_timer_update)
         self._update_timer.setSingleShot(True)
 
-    def showEvent(self, event: PySide2.QtGui.QShowEvent):
+    def showEvent(self, event: PySide6.QtGui.QShowEvent):
         self._update_timer.start()
         super().showEvent(event)
 
-    def hideEvent(self, event: PySide2.QtGui.QHideEvent):
+    def hideEvent(self, event: PySide6.QtGui.QHideEvent):
         self._update_timer.stop()
         super().hideEvent(event)
 

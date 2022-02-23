@@ -3,8 +3,8 @@ import traceback
 from pathlib import Path
 from typing import Optional
 
-from PySide2 import QtWidgets
-from PySide2.QtCore import Signal
+from PySide6 import QtWidgets
+from PySide6.QtCore import Signal
 
 from randovania.gui.dialog.game_input_dialog import GameInputDialog
 from randovania.gui.lib import common_qt_lib, async_dialog

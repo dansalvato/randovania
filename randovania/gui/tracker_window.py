@@ -10,9 +10,9 @@ from typing import Optional, Dict, Set, List, Tuple, Iterator, Union
 
 import matplotlib.pyplot as plt
 import networkx
-from PySide2 import QtWidgets
-from PySide2.QtCore import Qt
-from PySide2.QtWidgets import QMainWindow, QTreeWidgetItem, QCheckBox, QLabel, QGridLayout, QWidget, QMessageBox
+from PySide6 import QtWidgets, QtGui
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QCheckBox, QLabel, QGridLayout, QWidget, QMessageBox
 from matplotlib.axes import Axes
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
@@ -536,7 +536,7 @@ class TrackerWindow(QMainWindow, Ui_TrackerWindow):
         """
         Creates the possible_locations_tree with all worlds, areas and nodes.
         """
-        self.action_show_path_to_here = QtWidgets.QAction("Show path to here")
+        self.action_show_path_to_here = QtGui.QAction("Show path to here")
         self.action_show_path_to_here.triggered.connect(self._on_show_path_to_here)
         self.possible_locations_tree.itemDoubleClicked.connect(self._on_tree_node_double_clicked)
         self.possible_locations_tree.insertAction(None, self.action_show_path_to_here)
