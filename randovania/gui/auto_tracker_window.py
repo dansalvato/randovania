@@ -7,7 +7,7 @@ from typing import Dict, List, Union, Optional
 import PySide6
 from PySide6 import QtWidgets
 from PySide6.QtCore import QTimer, Signal, Qt
-from PySide6.QtGui import QPixmap, QActionGroup
+from PySide6.QtGui import QPixmap, QAction, QActionGroup
 from PySide6.QtWidgets import QMainWindow, QLabel, QSpacerItem, QSizePolicy
 from qasync import asyncSlot
 
@@ -75,7 +75,7 @@ class AutoTrackerWindow(QMainWindow, Ui_AutoTrackerWindow):
         self._action_to_name = {}
         theme_group = QActionGroup(self)
         for name in self.trackers.keys():
-            action = QtGui.QAction(self.menu_tracker)
+            action = QAction(self.menu_tracker)
             action.setText(name)
             action.setCheckable(True)
             action.setChecked(name == options.selected_tracker)
