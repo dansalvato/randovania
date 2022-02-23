@@ -13,13 +13,14 @@ async def execute_dialog(dialog: QtWidgets.QDialog) -> QtWidgets.QDialog.DialogC
     :return:
     """
     future = asyncio.get_event_loop().create_future()
+    receiver = future.set_result
 
-    dialog.finished.connect(future.set_result)
+    dialog.finished.connect(receiver)
     try:
         dialog.show()
         return await future
     finally:
-        dialog.finished.disconnect(future.set_result)
+        dialog.finished.disconnect(receiver)
 
 
 async def message_box(parent: Optional[QtWidgets.QWidget],
