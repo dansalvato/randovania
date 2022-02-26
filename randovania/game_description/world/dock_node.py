@@ -63,7 +63,8 @@ class DockNode(Node):
 
         if isinstance(target_node, DockNode):
             # TODO: Target node is expected to be a dock. Should this error?
-            back_lock = patches.dock_weakness.get(target_identifier, target_node.default_dock_weakness).lock
+            back_weak = patches.dock_weakness.get(target_identifier, target_node.default_dock_weakness)
+            back_lock = back_weak.lock
 
             if back_lock is None:
                 pass
@@ -74,7 +75,7 @@ class DockNode(Node):
             elif back_lock.lock_type in (DockLockType.FRONT_BLAST_BACK_IMPOSSIBLE,
                                          DockLockType.FRONT_BLAST_BACK_IF_MATCHING):
                 # FIXME: this should check if we've already openend the back
-                if back_lock != forward_weakness or back_lock.lock_type == DockLockType.FRONT_BLAST_BACK_IMPOSSIBLE:
+                if back_weak != forward_weakness or back_lock.lock_type == DockLockType.FRONT_BLAST_BACK_IMPOSSIBLE:
                     requirement = Requirement.impossible()
 
         yield target_node, requirement
