@@ -1,8 +1,23 @@
-import dataclasses
+from __future__ import annotations
 
-from randovania.game_description.world.dock import DockType, DockWeakness
-from randovania.game_description.world.node import Node
+import dataclasses
+import typing
+
+from randovania.game_description.requirements import Requirement, RequirementAnd
+from randovania.game_description.world.dock import DockType, DockWeakness, DockLockType
+from randovania.game_description.world.node import Node, NodeContext
 from randovania.game_description.world.node_identifier import NodeIdentifier
+
+
+def _resolve_dock_node(context: NodeContext, node: DockNode) -> typing.Optional[Node]:
+    connection = context.patches.dock_connection.get(
+        context.node_provider.identifier_for_node(node),
+        node.default_connection
+    )
+    if connection is not None:
+        return context.node_provider.node_by_identifier(connection)
+    else:
+        return None
 
 
 @dataclasses.dataclass(frozen=True)
@@ -29,3 +44,37 @@ class DockNode(Node):
 
     def __repr__(self):
         return "DockNode({!r} -> {})".format(self.name, self.default_connection)
+
+    def connections_from(self, context: NodeContext) -> typing.Iterator[tuple[Node, Requirement]]:
+        patches = context.patches
+        provider = context.node_provider
+        self_identifier = provider.identifier_for_node(self)
+
+        target_identifier = patches.dock_connection.get(self_identifier, self.default_connection)
+        if target_identifier is None:
+            # Explicitly connected to nothing.
+            return
+        target_node = provider.node_by_identifier(target_identifier)
+
+        forward_weakness = patches.dock_weakness.get(self_identifier, self.default_dock_weakness)
+        requirement = forward_weakness.requirement
+
+        # TODO: only add requirement if the blast shield has not been destroyed yet
+
+        if isinstance(target_node, DockNode):
+            # TODO: Target node is expected to be a dock. Should this error?
+            back_lock = patches.dock_weakness.get(target_identifier, target_node.default_dock_weakness).lock
+
+            if back_lock is None:
+                pass
+
+            elif back_lock.lock_type == DockLockType.FRONT_BLAST_BACK_BLAST:
+                requirement = RequirementAnd([requirement, back_lock.requirement])
+
+            elif back_lock.lock_type in (DockLockType.FRONT_BLAST_BACK_IMPOSSIBLE,
+                                         DockLockType.FRONT_BLAST_BACK_IF_MATCHING):
+                # FIXME: this should check if we've already openend the back
+                if back_lock != forward_weakness or back_lock.lock_type == DockLockType.FRONT_BLAST_BACK_IMPOSSIBLE:
+                    requirement = Requirement.impossible()
+
+        yield target_node, requirement
