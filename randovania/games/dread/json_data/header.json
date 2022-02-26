@@ -1,5 +1,5 @@
 {
-    "schema_version": 8,
+    "schema_version": 9,
     "game": "dread",
     "resource_database": {
         "items": {
@@ -1964,7 +1964,6 @@
                 "extra": {},
                 "items": {
                     "Access Open": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "and",
@@ -1972,10 +1971,10 @@
                                 "comment": null,
                                 "items": []
                             }
-                        }
+                        },
+                        "lock": null
                     },
                     "Access Closed": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "or",
@@ -1983,105 +1982,159 @@
                                 "comment": null,
                                 "items": []
                             }
-                        }
+                        },
+                        "lock": null
                     },
                     "Power Beam Door": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "template",
                             "data": "Shoot Beam"
-                        }
+                        },
+                        "lock": null
                     },
                     "Charge Beam Door": {
-                        "lock_type": 3,
                         "extra": {},
                         "requirement": {
-                            "type": "or",
+                            "type": "and",
                             "data": {
                                 "comment": null,
-                                "items": [
-                                    {
-                                        "type": "template",
-                                        "data": "Shoot Charge Beam"
-                                    },
-                                    {
-                                        "type": "and",
-                                        "data": {
-                                            "comment": null,
-                                            "items": [
-                                                {
-                                                    "type": "resource",
-                                                    "data": {
-                                                        "type": "tricks",
-                                                        "name": "Knowledge",
-                                                        "amount": 3,
-                                                        "negate": false
+                                "items": []
+                            }
+                        },
+                        "lock": {
+                            "lock_type": "front-blast-back-if-matching",
+                            "requirement": {
+                                "type": "or",
+                                "data": {
+                                    "comment": null,
+                                    "items": [
+                                        {
+                                            "type": "template",
+                                            "data": "Shoot Charge Beam"
+                                        },
+                                        {
+                                            "type": "and",
+                                            "data": {
+                                                "comment": null,
+                                                "items": [
+                                                    {
+                                                        "type": "resource",
+                                                        "data": {
+                                                            "type": "tricks",
+                                                            "name": "Knowledge",
+                                                            "amount": 3,
+                                                            "negate": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "data": "Lay Power Bomb"
                                                     }
-                                                },
-                                                {
-                                                    "type": "template",
-                                                    "data": "Lay Power Bomb"
-                                                }
-                                            ]
+                                                ]
+                                            }
                                         }
-                                    }
-                                ]
+                                    ]
+                                }
                             }
                         }
                     },
                     "Wide Beam Door": {
-                        "lock_type": 3,
                         "extra": {},
                         "requirement": {
-                            "type": "template",
-                            "data": "Shoot Wide Beam"
+                            "type": "and",
+                            "data": {
+                                "comment": null,
+                                "items": []
+                            }
+                        },
+                        "lock": {
+                            "lock_type": "front-blast-back-if-matching",
+                            "requirement": {
+                                "type": "template",
+                                "data": "Shoot Wide Beam"
+                            }
                         }
                     },
                     "Plasma Beam Door": {
-                        "lock_type": 3,
                         "extra": {},
                         "requirement": {
-                            "type": "template",
-                            "data": "Shoot Plasma Beam"
+                            "type": "and",
+                            "data": {
+                                "comment": null,
+                                "items": []
+                            }
+                        },
+                        "lock": {
+                            "lock_type": "front-blast-back-if-matching",
+                            "requirement": {
+                                "type": "template",
+                                "data": "Shoot Plasma Beam"
+                            }
                         }
                     },
                     "Wave Beam Door": {
-                        "lock_type": 3,
                         "extra": {},
                         "requirement": {
-                            "type": "resource",
+                            "type": "and",
                             "data": {
-                                "type": "items",
-                                "name": "Wave",
-                                "amount": 1,
-                                "negate": false
+                                "comment": null,
+                                "items": []
+                            }
+                        },
+                        "lock": {
+                            "lock_type": "front-blast-back-if-matching",
+                            "requirement": {
+                                "type": "resource",
+                                "data": {
+                                    "type": "items",
+                                    "name": "Wave",
+                                    "amount": 1,
+                                    "negate": false
+                                }
                             }
                         }
                     },
                     "Missile Door": {
-                        "lock_type": 3,
                         "extra": {},
                         "requirement": {
-                            "type": "resource",
+                            "type": "and",
                             "data": {
-                                "type": "items",
-                                "name": "MissileAmmo",
-                                "amount": 1,
-                                "negate": false
+                                "comment": null,
+                                "items": []
+                            }
+                        },
+                        "lock": {
+                            "lock_type": "front-blast-back-if-matching",
+                            "requirement": {
+                                "type": "resource",
+                                "data": {
+                                    "type": "items",
+                                    "name": "MissileAmmo",
+                                    "amount": 1,
+                                    "negate": false
+                                }
                             }
                         }
                     },
                     "Super Missile Door": {
-                        "lock_type": 3,
                         "extra": {},
                         "requirement": {
-                            "type": "template",
-                            "data": "Shoot Super Missile"
+                            "type": "and",
+                            "data": {
+                                "comment": null,
+                                "items": []
+                            }
+                        },
+                        "lock": {
+                            "lock_type": "front-blast-back-if-matching",
+                            "requirement": {
+                                "type": "template",
+                                "data": "Shoot Super Missile"
+                            }
                         }
                     },
                     "Sensor Lock Door": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "resource",
@@ -2091,10 +2144,10 @@
                                 "amount": 1,
                                 "negate": false
                             }
-                        }
+                        },
+                        "lock": null
                     },
                     "Grapple Beam Door": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "resource",
@@ -2104,10 +2157,10 @@
                                 "amount": 1,
                                 "negate": false
                             }
-                        }
+                        },
+                        "lock": null
                     },
                     "Phase Shift Door": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "resource",
@@ -2117,10 +2170,10 @@
                                 "amount": 1,
                                 "negate": false
                             }
-                        }
+                        },
+                        "lock": null
                     },
                     "Artaria Thermal Door": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "resource",
@@ -2130,7 +2183,8 @@
                                 "amount": 1,
                                 "negate": false
                             }
-                        }
+                        },
+                        "lock": null
                     }
                 }
             },
@@ -2139,15 +2193,14 @@
                 "extra": {},
                 "items": {
                     "Slide Tunnel": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "template",
                             "data": "Can Slide"
-                        }
+                        },
+                        "lock": null
                     },
                     "Morph Ball Tunnel": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "resource",
@@ -2157,18 +2210,18 @@
                                 "amount": 1,
                                 "negate": false
                             }
-                        }
+                        },
+                        "lock": null
                     },
                     "Morph Ball Launcher": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "template",
                             "data": "Lay Bomb"
-                        }
+                        },
+                        "lock": null
                     },
                     "Cataris EMMI Tunnel": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "and",
@@ -2195,10 +2248,10 @@
                                     }
                                 ]
                             }
-                        }
+                        },
+                        "lock": null
                     },
                     "Dairon EMMI Tunnel": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "and",
@@ -2225,10 +2278,10 @@
                                     }
                                 ]
                             }
-                        }
+                        },
+                        "lock": null
                     },
                     "Ferenia EMMI Tunnel": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "and",
@@ -2255,10 +2308,10 @@
                                     }
                                 ]
                             }
-                        }
+                        },
+                        "lock": null
                     },
                     "Ghavoran EMMI Tunnel": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "and",
@@ -2285,7 +2338,8 @@
                                     }
                                 ]
                             }
-                        }
+                        },
+                        "lock": null
                     }
                 }
             },
@@ -2294,7 +2348,6 @@
                 "extra": {},
                 "items": {
                     "Open Passage": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "and",
@@ -2302,10 +2355,10 @@
                                 "comment": null,
                                 "items": []
                             }
-                        }
+                        },
+                        "lock": null
                     },
                     "Not Determined": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "or",
@@ -2313,10 +2366,10 @@
                                 "comment": null,
                                 "items": []
                             }
-                        }
+                        },
+                        "lock": null
                     },
                     "Blocked Passage": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "or",
@@ -2324,10 +2377,10 @@
                                 "comment": null,
                                 "items": []
                             }
-                        }
+                        },
+                        "lock": null
                     },
                     "EMMI Door": {
-                        "lock_type": 0,
                         "extra": {},
                         "requirement": {
                             "type": "and",
@@ -2335,7 +2388,8 @@
                                 "comment": null,
                                 "items": []
                             }
-                        }
+                        },
+                        "lock": null
                     }
                 }
             }
